@@ -1,0 +1,17 @@
+#:import time time
+
+<HomeScreen>:
+    orientation: 'vertical'
+    
+    Label:
+        id: display
+        text: 'nothing'
+        font_size: 0.5 * self.height
+    
+    Button:
+        text: 'Start'
+        on_press: display.text = f"{round(time.time())} seconds"
+        
+    Button:
+        text: 'Stop'
+                
