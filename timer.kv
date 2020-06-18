@@ -1,14 +1,22 @@
 <HomeScreen>:
     orientation: 'vertical'
-    
+
     Button:
         id: timer_button
-        text:
-            'click to start'
-        font_size:
-            0.1 * self.height    
-        on_release:
-            root.timer_button()
+        text: 'click to start'
+        font_size: 0.1 * self.height
+        size_hint_y: .8
+        background_color: [0, 0, 0, 1]
+        on_touch_down: root.timer_button()
+            
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: .2
+        
+        Button:
+            text: 'test'
+            font_size: 0.2 * self.height
+            background_color: [0, 0, 0, 1]
 
             
                 

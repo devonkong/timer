@@ -3,10 +3,14 @@ kivy.require('1.11.1')
 
 from kivy.app import App
 
-from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
 
-import time
+# Window settings
+from kivy.core.window import Window
+Window.size = (400, 500)
+Window.borderless = True
+
 from datetime import datetime, timedelta
 
 
@@ -21,10 +25,12 @@ class HomeScreen(BoxLayout):
         """Starts or stops timer when timer button is pressed."""
   
         label = self.ids['timer_button']  # Refers to Label inside Button with id: timer_button
+            
         # If not currently timing, start timer
         if not self.is_timing:
             self.start_time = datetime.now()
             self.is_timing = True
+            # TODO: Display stopwatch time in real-time
             label.text = 'timer started'  # Update text attribute of Label
         
         # If timer is running, stop timer and record time
@@ -42,7 +48,13 @@ class HomeScreen(BoxLayout):
         hour = int(total_secs // 3600)
         mins = int((total_secs - 3600 * hour) // 60)
         secs = int((total_secs % 60) // 1)
-        return f"{hour:02}:{mins:02}:{secs:02}"
+        
+        if hour == 0:
+            return f"{mins:02}:{secs:02}"
+        elif hour > 0:
+            return f"{hour:02}:{mins:02}:{secs:02}"
+            
+    # TODO: Continue or reset timer
 
             
 class TimerApp(App):
