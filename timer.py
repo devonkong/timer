@@ -24,8 +24,8 @@ class TimerApp(App):
     
     
     
-# if __name__ == "__main__":
-#     TimerApp().run()
+if __name__ == "__main__":
+    TimerApp().run()
 
 
 start_time = 0
@@ -35,20 +35,22 @@ def start_stopwatch():
     global start_time
     start_time = time.time()
     logging.debug(start_time)
+    return start_time
 
 def stop_stopwatch():
     global end_time
     end_time = time.time()
     logging.debug(end_time)
+    return end_time
 
-start_stopwatch()
-time.sleep(2)
-stop_stopwatch()
+# start_stopwatch()
+# time.sleep(2)
+# stop_stopwatch()
 
-elapsed_time = end_time - start_time
-logging.debug(elapsed_time)
-formatted_time = f"Elapsed time: {round(elapsed_time)}s."
+# elapsed_time = end_time - start_time
+# logging.debug(elapsed_time)
+# formatted_time = f"Elapsed time: {round(elapsed_time)}s."
 
-print(formatted_time)
+# print(formatted_time)
 
 logging.debug('Program terminated.')

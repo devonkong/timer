@@ -5,13 +5,15 @@
     
     Label:
         id: display
-        text: 'nothing'
+        text: '00:00:00'
         font_size: 0.5 * self.height
     
-    Button:
-        text: 'Start'
-        on_press: display.text = f"{round(time.time())} seconds"
+    BoxLayout:
+        orientation: 'horizontal'
         
-    Button:
-        text: 'Stop'
+        Button:
+            text: 'Start'
+            on_press: display.text = "Timer started."
+            on_press: self.text = 'Stop' if self.text == 'Start' else 'Start'
+            
                 
