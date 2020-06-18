@@ -1,19 +1,14 @@
-#:import time time
-
 <HomeScreen>:
     orientation: 'vertical'
     
-    Label:
-        id: display
-        text: '00:00:00'
-        font_size: 0.5 * self.height
-    
-    BoxLayout:
-        orientation: 'horizontal'
-        
-        Button:
-            text: 'Start'
-            on_press: display.text = "Timer started."
-            on_press: self.text = 'Stop' if self.text == 'Start' else 'Start'
+    Button:
+        id: timer_button
+        text:
+            'click to start'
+        font_size:
+            0.1 * self.height    
+        on_release:
+            root.timer_button()
+
             
                 
