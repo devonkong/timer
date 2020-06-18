@@ -7,6 +7,7 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 
 import time
+from datetime import datetime, timedelta
 
 
 class HomeScreen(BoxLayout):
@@ -17,24 +18,33 @@ class HomeScreen(BoxLayout):
     is_timing = False
     
     def timer_button(self, *args):
-        # Runs when the timer button is pressed
-        
+        """Starts or stops timer when timer button is pressed."""
+  
         label = self.ids['timer_button']  # Refers to Label inside Button with id: timer_button
-        
         # If not currently timing, start timer
         if not self.is_timing:
-            self.start_time = time.time()
+            self.start_time = datetime.now()
             self.is_timing = True
             label.text = 'timer started'  # Update text attribute of Label
         
         # If timer is running, stop timer and record time
         elif self.is_timing:
-            self.end_time = time.time()
+            self.end_time = datetime.now()
             self.is_timing = False
             self.elapsed_time = self.end_time - self.start_time
-            label.text = f"{round(self.elapsed_time)}s"  # Display elapsed time
-            
+            label.text = self.format_time(self.elapsed_time)  # Display formatted elapsed time
+           
+        
+    def format_time(self, timedelta_input):
+        """Takes timedelta as input and returns formatted time as string value."""
+        
+        total_secs = timedelta_input.total_seconds()
+        hour = int(total_secs // 3600)
+        mins = int((total_secs - 3600 * hour) // 60)
+        secs = int((total_secs % 60) // 1)
+        return f"{hour:02}:{mins:02}:{secs:02}"
 
+            
 class TimerApp(App):
     def build(self):
         return HomeScreen()
