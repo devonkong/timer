@@ -67,6 +67,8 @@ class TimerPage(Screen):
             self.elapsed_time = timedelta(seconds=0)
             self.ids['timer_button'].text = '00:00'  # Reset the display
             self.ids['reset_button'].opacity = 0  # Hide the reset button
+        else:
+            self.timer_button()  # If timer is running, act as an invisible timer button.
 
     
 # Enable navigation between pages
