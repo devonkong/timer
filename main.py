@@ -29,7 +29,6 @@ class HomePage(Screen):
 class TimerPage(Screen):
     elapsed_time = timedelta(seconds=0)
     is_timing = False
-    display_secs = 0
     
     def start_stop(self, *args):
         """Starts or stops timer when timer button is pressed."""
@@ -60,10 +59,9 @@ class TimerPage(Screen):
             elif hour > 0:
                 return f"{hour:02}:{mins:02}:{secs:02}"
    
-    def update_time(self, nap):
+    def update_time(self, *args):
         """Update timer display."""
-        self.display_secs += nap
-        self.ids['start_stop_button'].text = self.format_time(timedelta(seconds=self.display_secs))
+        self.ids['start_stop_button'].text = self.format_time(datetime.now() - self.start_time + self.elapsed_time)
                               
     def reset_elapsed_time(self):
         """If timer is not running and has not already been reset when called, reset elapsed time and hide the reset button."""
@@ -74,7 +72,7 @@ class TimerPage(Screen):
             self.ids['start_stop_button'].text = '00:00'  # Reset the display
             self.ids['reset_button'].opacity = 0  # Hide the reset button
         else:
-            self.start_stop()  # If timer is running, act as an invisible timer button.
+            self.start_stop()  # If timer is running, act as an invisible timer button
 
     
 # Enable navigation between pages
