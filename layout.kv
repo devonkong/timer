@@ -1,9 +1,12 @@
+<Button>:
+    background_color: [0, 0, 0, 1]
+
+
 <HomePage>:
     BoxLayout:
         Button:
             text: 'tap to start'
             font_size: 0.1 * self.height
-            background_color: [0, 0, 0, 1]
             on_release:
                 root.manager.current = "timer"
             
@@ -13,14 +16,13 @@
         orientation: 'vertical'
         
         Button:
-            id: timer_button
+            id: start_stop_button
             text: '00:00'
             font_size: 0.1 * self.height
             size_hint_y: .8
-            background_color: [0, 0, 0, 1]
             on_release:
-                root.timer_button()
-                print('timerbutton')
+                root.start_stop()
+                print('debug: clicked startstopbutton')
 
         BoxLayout:
             orientation: 'horizontal'
@@ -30,10 +32,9 @@
                 id: reset_button
                 text: 'reset'
                 font_size: 0.2 * self.height
-                background_color: [0, 0, 0, 1]
                 opacity: 0
                 on_release:
                     root.reset_elapsed_time()
-                    print('resetbutton')
+                    print('debug: clicked resetbutton')
             
                 

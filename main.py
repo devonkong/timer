@@ -3,11 +3,12 @@ kivy.require('1.11.1')
 
 from kivy.app import App
 
+# Kivy UI elements
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 
-# Load kivy file
+# Load Kivy file
 from kivy.lang import Builder
 Builder.load_file("layout.kv")
 
@@ -17,6 +18,7 @@ Window.size = (400, 500)
 Window.borderless = True
 
 from datetime import datetime, timedelta
+
 
 
 class HomePage(Screen):
@@ -29,21 +31,21 @@ class TimerPage(Screen):
     elapsed_time = timedelta(seconds=0)
     is_timing = False
     
-    def timer_button(self, *args):
+    def start_stop(self, *args):
         """Starts or stops timer when timer button is pressed."""
         # If not currently timing, start timer
         if not self.is_timing:
             self.start_time = datetime.now()
             self.is_timing = True
             # TODO: Display stopwatch time in real-time
-            self.ids['timer_button'].text = 'timer started'  # Update text attribute of Label
+            self.ids['start_stop_button'].text = 'timer started'  # Update text attribute of Label
             self.ids['reset_button'].opacity = 0  # Hide the reset button
         # If timer is running, stop timer and record time
         elif self.is_timing:
             self.end_time = datetime.now()
             self.is_timing = False
             self.elapsed_time += self.end_time - self.start_time
-            self.ids['timer_button'].text = self.format_time(self.elapsed_time)  # Display formatted elapsed time
+            self.ids['start_stop_button'].text = self.format_time(self.elapsed_time)  # Display formatted elapsed time
             self.ids['reset_button'].opacity = 1  # Show the reset button
            
         
@@ -65,10 +67,10 @@ class TimerPage(Screen):
         if not self.is_timing:
             self.is_timing = False
             self.elapsed_time = timedelta(seconds=0)
-            self.ids['timer_button'].text = '00:00'  # Reset the display
+            self.ids['start_stop_button'].text = '00:00'  # Reset the display
             self.ids['reset_button'].opacity = 0  # Hide the reset button
         else:
-            self.timer_button()  # If timer is running, act as an invisible timer button.
+            self.start_stop()  # If timer is running, act as an invisible timer button.
 
     
 # Enable navigation between pages
@@ -76,11 +78,14 @@ navigator = ScreenManager(transition=NoTransition())
 navigator.add_widget(TimerPage(name='timer'))
 navigator.add_widget(HomePage(name='home'))  # TODO: Put at top of navigator list
 
-            
+
+# Core app
 class TimerApp(App):
     def build(self):
         return navigator
     
+
+# App launcher
 if __name__ == "__main__":
     TimerApp().run()
 
