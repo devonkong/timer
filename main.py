@@ -12,12 +12,27 @@ from kivy.clock import Clock
 
 # Load Kivy file
 from kivy.lang import Builder
-Builder.load_file("layout.kv")
+Builder.load_file("style.kv")
+
+# Set colour palette
+import kivy.utils as utils
+bg_col = utils.get_color_from_hex('#1E1E1E')
+text_col_main = utils.get_color_from_hex('#DDDDDD')
+text_col_secondary = utils.get_color_from_hex('#555555')
+
+# App settings
+from kivy.config import Config
+Config.set('kivy', 'exit_on_escape', 'True')
+Config.set('graphics', 'resizable', 'False')
 
 # Window settings
 from kivy.core.window import Window
 Window.size = (400, 500)
-Window.borderless = True
+Window.top = 0
+Window.left = 0
+Window.borderless = False
+Window.fullscreen = False
+Window.clearcolor = bg_col
 
 from datetime import datetime, timedelta
 
@@ -36,6 +51,7 @@ class TimerPage(Screen):
         if not self.is_timing:
             self.is_timing = True
             self.start_time = datetime.now() 
+            self.ids['start_stop_button'].color = text_col_main
             Clock.schedule_interval(self.update_time, 0)  # Continuously update timer display
             self.ids['reset_button'].opacity = 0  # Hide the reset button
         # If timer is running, stop timer and record time
@@ -69,6 +85,7 @@ class TimerPage(Screen):
             self.is_timing = False
             self.elapsed_time = timedelta(seconds=0)
             self.display_secs = 0
+            self.ids['start_stop_button'].color = text_col_secondary
             self.ids['start_stop_button'].text = '00:00'  # Reset the display
             self.ids['reset_button'].opacity = 0  # Hide the reset button
         else:

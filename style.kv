@@ -1,8 +1,13 @@
-<Button>:
-    background_color: [0, 0, 0, 1]
+#:import utils kivy.utils
 
+
+<Button>:
+    font_name: 'SF-Pro-Display-Regular.otf'
+    color: utils.get_color_from_hex('#DDDDDD')
+    background_color: 0, 0, 0, 0
 
 <HomePage>:
+    
     BoxLayout:
         Button:
             text: 'tap to start'
@@ -18,7 +23,8 @@
         Button:
             id: start_stop_button
             text: '00:00'
-            font_size: 0.1 * self.height
+            color: utils.get_color_from_hex('#555555')
+            font_size: 0.15 * self.height
             size_hint_y: .8
             on_release:
                 root.start_stop()
@@ -31,6 +37,7 @@
             Button:
                 id: reset_button
                 text: 'reset'
+                color: utils.get_color_from_hex('#555555')
                 font_size: 0.2 * self.height
                 opacity: 0
                 on_release:
