@@ -39,18 +39,18 @@ from datetime import datetime, timedelta
 
 class HomePage(Screen):
     pass
-    
+
 
 class TimerPage(Screen):
     elapsed_time = timedelta(seconds=0)
     is_timing = False
-    
+
     def start_stop(self, *args):
         """Starts or stops timer when timer button is pressed."""
         # If not currently timing, start timer
         if not self.is_timing:
             self.is_timing = True
-            self.start_time = datetime.now() 
+            self.start_time = datetime.now()
             self.ids['start_stop_button'].color = text_col_main
             Clock.schedule_interval(self.update_time, 0)  # Continuously update timer display
             self.ids['reset_button'].opacity = 0  # Hide the reset button
@@ -60,9 +60,10 @@ class TimerPage(Screen):
             Clock.unschedule(self.update_time)
             self.end_time = datetime.now()
             self.elapsed_time += self.end_time - self.start_time
+            self.ids['start_stop_button'].color = text_col_secondary
             self.ids['start_stop_button'].text = self.format_time(self.elapsed_time)  # Display formatted elapsed time
             self.ids['reset_button'].opacity = 1  # Show the reset button
-    
+
     def format_time(self, timedelta_input):
             """Takes timedelta as input and returns formatted time as string value."""
             total_secs = timedelta_input.total_seconds()
@@ -74,11 +75,11 @@ class TimerPage(Screen):
                 return f"{mins:02}:{secs:02}"
             elif hour > 0:
                 return f"{hour:02}:{mins:02}:{secs:02}"
-   
+
     def update_time(self, *args):
         """Update timer display."""
         self.ids['start_stop_button'].text = self.format_time(datetime.now() - self.start_time + self.elapsed_time)
-                              
+
     def reset_elapsed_time(self):
         """If timer is not running and has not already been reset when called, reset elapsed time and hide the reset button."""
         if not self.is_timing and self.elapsed_time != timedelta(seconds=0):
@@ -91,7 +92,7 @@ class TimerPage(Screen):
         else:
             self.start_stop()  # If timer is running, act as an invisible timer button
 
-    
+
 # Enable navigation between pages
 navigator = ScreenManager(transition=NoTransition())
 navigator.add_widget(TimerPage(name='timer'))
@@ -102,10 +103,8 @@ navigator.add_widget(HomePage(name='home'))  # TODO: Put at top of navigator lis
 class TimerApp(App):
     def build(self):
         return navigator
-    
+
 
 # App launcher
 if __name__ == "__main__":
     TimerApp().run()
-
-

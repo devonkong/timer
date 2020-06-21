@@ -6,27 +6,24 @@ Track and visualize your activity across multiple projects – all within a clea
 
 ## Features
 
-### Completed
+### Basic
 
 - [x] Records time
 - [x] Displays timer in real-time
 - [x] Option to continue or reset
 
-### Currently working on
-
+### User Interface
 - [ ] Light and dark mode support
-
-### Plan to add
-
 - [ ] Display timer in menu bar
 - [ ] Start and stop timer from menu bar
-- [ ] Save activity data locally
-- [ ] Track time by project
-- [ ] Create custom projects
-- [ ] Stats page
 
-### On the fence
-
+### Productivity
 - [ ] Reminds you to take breaks at set intervals
 - [ ] Create custom intervals
+- [ ] Track time by project
+- [ ] Create custom projects
+
+#### Data Tracking
+- [ ] Save activity data locally
+- [ ] Stats page
 - [ ] Download activity history
