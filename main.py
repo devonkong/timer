@@ -1,30 +1,33 @@
-from datetime import datetime, timedelta
-from kivy.core.window import Window
-from kivy.config import Config
-import kivy.utils as utils
-from kivy.lang import Builder
-from kivy.clock import Clock
+import kivy
+from kivy.app import App
+kivy.require('1.11.1')
+
+# Kivy UI modules
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-from kivy.app import App
-import kivy
-kivy.require('1.11.1')
 
+# Time tracking modules
+from kivy.clock import Clock
+from datetime import datetime, timedelta
 
 # Load Kivy file
+from kivy.lang import Builder
 Builder.load_file("style.kv")
 
 # Set colour palette
+import kivy.utils as utils
 bg_col = utils.get_color_from_hex('#1E1E1E')
 text_col_main = utils.get_color_from_hex('#DDDDDD')
 text_col_secondary = utils.get_color_from_hex('#555555')
 
 # App settings
+from kivy.config import Config
 Config.set('kivy', 'exit_on_escape', 'True')
 Config.set('graphics', 'resizable', 'False')
 
 # Window settings
+from kivy.core.window import Window
 Window.size = (400, 500)
 Window.top = 0
 Window.left = 0
@@ -57,7 +60,8 @@ class TimerPage(Screen):
             self.end_time = datetime.now()
             self.elapsed_time += self.end_time - self.start_time
             self.ids['start_stop_button'].color = text_col_secondary
-            self.ids['start_stop_button'].text = self.format_time(self.elapsed_time)  # Display formatted elapsed time
+            self.ids['start_stop_button'].text = self.format_time(
+                self.elapsed_time)  # Display formatted elapsed time
             self.ids['reset_button'].opacity = 1  # Show the reset button
 
     def format_time(self, timedelta_input):
@@ -74,7 +78,8 @@ class TimerPage(Screen):
 
     def update_time(self, *args):
         """Update timer display."""
-        self.ids['start_stop_button'].text = self.format_time(datetime.now() - self.start_time + self.elapsed_time)
+        self.ids['start_stop_button'].text = self.format_time(
+            datetime.now() - self.start_time + self.elapsed_time)
 
     def reset_elapsed_time(self):
         """If timer is not running and has not already been reset when called, reset elapsed time and hide the reset button."""
