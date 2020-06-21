@@ -57,8 +57,7 @@ class TimerPage(Screen):
             self.end_time = datetime.now()
             self.elapsed_time += self.end_time - self.start_time
             self.ids['start_stop_button'].color = text_col_secondary
-            self.ids['start_stop_button'].text = self.format_time(
-                self.elapsed_time)  # Display formatted elapsed time
+            self.ids['start_stop_button'].text = self.format_time(self.elapsed_time)  # Display formatted elapsed time
             self.ids['reset_button'].opacity = 1  # Show the reset button
 
     def format_time(self, timedelta_input):
@@ -75,15 +74,13 @@ class TimerPage(Screen):
 
     def update_time(self, *args):
         """Update timer display."""
-        self.ids['start_stop_button'].text = self.format_time(
-            datetime.now() - self.start_time + self.elapsed_time)
+        self.ids['start_stop_button'].text = self.format_time(datetime.now() - self.start_time + self.elapsed_time)
 
     def reset_elapsed_time(self):
         """If timer is not running and has not already been reset when called, reset elapsed time and hide the reset button."""
         if not self.is_timing and self.elapsed_time != timedelta(seconds=0):
             self.is_timing = False
             self.elapsed_time = timedelta(seconds=0)
-            self.display_secs = 0
             self.ids['start_stop_button'].color = text_col_secondary
             self.ids['start_stop_button'].text = '00:00'  # Reset the display
             self.ids['reset_button'].opacity = 0  # Hide the reset button
