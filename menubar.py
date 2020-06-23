@@ -1,6 +1,7 @@
 
 from datetime import datetime, timedelta
 import rumps
+rumps.debug_mode(True)
 
 # TODO: Figure out if I can call Kivy app from here
 
@@ -78,15 +79,15 @@ class MenuBarIcon(rumps.App):
         self.update_menu()
 
     def update_menu(self, *args):
-        if is_timing and not is_reset:  # Timer is running
+        if self.is_timing and not self.is_reset:  # Timer is running
             print('debug: timing, not reset')
             self.start_stop_button.title = self.config['stop']
             self.reset_button.set_callback(None)
-        elif not is_timing and not is_reset:  # Timer is paused
+        elif not self.is_timing and not self.is_reset:  # Timer is paused
             print('debug: not timing, not reset')
             self.start_stop_button.title = self.config['start']
-            self.reset_button.set_callback(reset_elapsed_time)
-        elif not is_timing and is_reset:  # Timer is stopped and reset
+            self.reset_button.set_callback(self.reset_elapsed_time)
+        elif not self.is_timing and self.is_reset:  # Timer is stopped and reset
             print('debug: not timing, reset')
             self.start_stop_button.title = self.config['start']
             self.reset_button.set_callback(None)
