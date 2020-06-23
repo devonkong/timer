@@ -5,13 +5,14 @@ import rumps
 # TODO: Figure out if I can call Kivy app from here
 
 class MenuBarIcon(rumps.App):
-    elapsed_time = timedelta(seconds=0)
-    is_timing = False
-    is_reset = True
-    ticktock = False
-
     def __init__(self):
         super(MenuBarIcon, self).__init__('timer')
+        # Set up class variables
+        self.elapsed_time = timedelta(seconds=0)
+        self.is_timing = False
+        self.is_reset = True
+        self.ticktock = False
+        # Configure app settings
         self.config = {
             'app_name': 'timer',
             'title': '●',
