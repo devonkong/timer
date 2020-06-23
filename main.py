@@ -1,15 +1,15 @@
+
+# Builtin modules
+from datetime import datetime, timedelta
+
+# Kivy modules
 import kivy
 from kivy.app import App
 kivy.require('1.11.1')
-
-# Kivy UI modules
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-
-# Time tracking modules
 from kivy.clock import Clock
-from datetime import datetime, timedelta
 
 # Load Kivy file
 from kivy.lang import Builder
