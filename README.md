@@ -14,8 +14,9 @@ Track and visualize your activity across multiple projects – all within a clea
 
 ### User Interface
 - [ ] Light and dark mode support
-- [ ] Display timer in menu bar
-- [ ] Start and stop timer from menu bar
+- [x] Display timer in menu bar
+- [x] Start and stop timer from menu bar
+- [ ] Option to hide elapsed time in menu bar
 
 ### Productivity
 - [ ] Reminds you to take breaks at set intervals
